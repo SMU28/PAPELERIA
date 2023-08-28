@@ -10,14 +10,14 @@ public class MainApp {
     private JFrame frame;
     private Inventario inventario;
 
-    public MainApp() {
+    public MainApp() {  //constructor 
         inventario = new Inventario();
 
-        frame = new JFrame("INVENTARIO DE PAPELERIA");
+        frame = new JFrame("INVENTARIO DE PAPELERIA");   //configuracion de la ventana 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
 
-        JButton agregarButton = new JButton("Agregar producto");
+        JButton agregarButton = new JButton("Agregar producto"); // configuracion de botones 
         JButton mostrarButton = new JButton("Mostrar inventario");
         JButton venderButton = new JButton("Vender");
 
@@ -52,7 +52,7 @@ public class MainApp {
         frame.setVisible(true);
     }
 
-    private void mostrarFormularioAgregar() {
+    private void mostrarFormularioAgregar() {        // muestra el formulario en una ventana emergente a el usuario
         String nombre = JOptionPane.showInputDialog(frame, "Ingrese el nombre del producto: ");
         double precio = Double.parseDouble(JOptionPane.showInputDialog(frame, "Ingrese el precio del producto: "));
         int cantidad = Integer.parseInt(JOptionPane.showInputDialog(frame, "Ingrese la cantidad en stock: "));
@@ -65,7 +65,7 @@ public class MainApp {
         }
     }
 
-    private void mostrarInventario() {
+    private void mostrarInventario() {  //contiene el listado de las cosas que se hallan en el invetario una vez se agregaran correctamente
         StringBuilder inventarioStr = new StringBuilder("INVENTARIO:\n");
 
         for (Producto producto : inventario.getProductos()) {
@@ -75,7 +75,7 @@ public class MainApp {
         JOptionPane.showMessageDialog(frame, inventarioStr.toString(), "Inventario", JOptionPane.PLAIN_MESSAGE);
     }
 
-    private int obtenerEntero(String mensaje) {
+    private int obtenerEntero(String mensaje) {  // tanto este metodo como el de obtener double, se encargar de que el usuario ingrese los valores numericos validos, los cuales manejan las excepciones
         int numero = 0;
         while (true) {
             try {
@@ -104,7 +104,7 @@ public class MainApp {
         return numero;
     }
 
-    private void venderProducto() {
+    private void venderProducto() {  // se encarga de la parte de la venta del producto, el cual pide el nombre y la cantidad, las excepciones son capturadas con el IllegalArgumentException, si hay algun error
         String nombreProducto = JOptionPane.showInputDialog(frame, "Ingrese el nombre del producto a vender: ");
         Producto producto = inventario.buscarProductoPorNombre(nombreProducto);
 
@@ -121,7 +121,7 @@ public class MainApp {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) {  // aqui inicia la aplicacion y utiliza el SwingUtilities.invokeLater para poder asegurar que la interfaz grafica se cree y se muestre de manera segura 
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
